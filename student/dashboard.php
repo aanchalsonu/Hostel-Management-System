@@ -1,7 +1,7 @@
 <?php
     session_start();
     include('../includes/dbconn.php');
-    include('../includes/check-login.php');
+    include('../includes/check-login.php'); //TO check for the proper login of the user 
     check_login();
 ?>
 
@@ -11,13 +11,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     
     <title>Hostel Management System</title>
-    <!-- Custom CSS -->
+    
     <link href="../assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="../assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -27,12 +26,14 @@
 
 <body>
     <div id="main-wrapper">
-        <header class="topbar" >
+        <header class="topbar" >           
+            <!-- For the navigation bar of the page  --> 
             <?php include '../includes/student-navigation.php'?>
         </header>
         <aside class="left-sidebar" >
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" >
+                <!-- For the side bar of the home page -->
                 <?php include '../includes/student-sidebar.php'?>
             </div>
             <!-- End Sidebar scroll-->
@@ -46,15 +47,14 @@
             </div>
             
             <div class="container-fluid">
-                <!-- *************************************************************** -->
-                <!-- Start First Cards -->
-                <!-- *************************************************************** -->
+                
                 <div class="card-group"  style="margin-left: 255px;">
                     <div class="card border-right">
                         <div class="card-body">
                             <div class="d-flex d-lg-flex d-md-block align-items-center" >
                                 <div>
                                     <div class="d-inline-flex align-items-center">
+                                        <!-- For the 3 boxes on home page , each diaplaying count of students ,rooms and rooms available -->
                                         <h2 class="text-dark mb-1 font-weight-medium"><?php include '../includes/counters/student-count.php'?></h2>
                                 
                                     </div>
@@ -97,10 +97,7 @@
                     </div>
                     
                 </div>
-                <!-- *************************************************************** -->
-                <!-- End First Cards -->
-                <!-- *************************************************************** -->
-                
+               
                
             </div>
             

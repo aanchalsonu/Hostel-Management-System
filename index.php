@@ -1,36 +1,36 @@
 <?php
     session_start();
     include('includes/dbconn.php');
-    if(isset($_POST['login']))
+    //post is used to pass data from web form to server side , it is used for confidential data 
+    if(isset($_POST['login'])) //Checks if login Key exists and is set to some value other than null
     {
     $email=$_POST['email'];
     $password=$_POST['password'];
-    $password = md5($password);
-    $stmt=$mysqli->prepare("SELECT email,password,id FROM userregistration WHERE email=? and password=? ");
-        $stmt->bind_param('ss',$email,$password);
-        $stmt->execute();
-        $stmt -> bind_result($email,$password,$id);
-        $rs=$stmt->fetch();
-         $stmt->close();
-        $_SESSION['id']=$id;
+    $password = md5($password); //md5 function converts the password into cipher form
+    $stmt=$mysqli->prepare("SELECT email,password,id FROM userregistration WHERE email=? and password=? ");//qury to select password ,email and id for further processing 
+        $stmt->bind_param('ss',$email,$password); //Bindes the parameters to the specified statement. s : String
+        $stmt->execute(); //Executing the statement , sends the statement to the database to be executed and returns true or false
+        $stmt -> bind_result($email,$password,$id); // To retrive the result of the sql statement 
+        $rs=$stmt->fetch(); // It is used to retrive the results of next row one by one until no rows are left 
+        $stmt->close();
+        $_SESSION['id']=$id; // creates a session variable id , which can be used in subsequent scripts. SESSION is a global array that allows you to store data across the Multiple request in sessions
         $_SESSION['login']=$email;
-        $uip=$_SERVER['REMOTE_ADDR'];
+        $uip=$_SERVER['REMOTE_ADDR']; // to access the IP address of the current user. SERVER is a global array which stores information about Server
         $ldate=date('d/m/Y h:i:s', time());
          if($rs){
             $uid=$_SESSION['id'];
             $uemail=$_SESSION['login'];
         $ip=$_SERVER['REMOTE_ADDR'];
-        $geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip;
-        $addrDetailsArr = unserialize(file_get_contents($geopluginURL));
-        $city = $addrDetailsArr['geoplugin_city'];
-        $country = $addrDetailsArr['geoplugin_countryName'];
-        $log="INSERT into userLog(userId,userEmail,userIp,city,country) values('$uid','$uemail','$ip','$city','$country')";
-        $mysqli->query($log);
+        // $geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip;
+        // $addrDetailsArr = unserialize(file_get_contents($geopluginURL));
+        // $city = $addrDetailsArr['geoplugin_city'];
+        // $country = $addrDetailsArr['geoplugin_countryName'];
+        $log="INSERT into userLog(userId,userEmail,userIp) values('$uid','$uemail','$ip')"; // query to be executed 
+        $mysqli->query($log); //The query string is stored in the variable "$log" and is being passed as an argument to the "query()" method of the MySQLi object "$mysqli".
         if($log){
-            header("location:student/dashboard.php");
+            header("location:student/dashboard.php"); // if true then go to student dashboard page
                  }
-        } else {
-            echo $mysqli->error();
+        } else { // Display an error messages
             echo "<script>alert('Sorry, Invalid Username/Email or Password!');</script>";
                }
    }
@@ -68,9 +68,7 @@
 
 <body>
     <div class="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Preloader - style you can find in spinners.css -->
-        <!-- ============================================================== -->
+       
         <div class="preloader">
             <div class="lds-ripple">
                 <div class="lds-pos"></div>
@@ -118,21 +116,14 @@
                 </div>
             </div>
         </div>
-        <!-- By CodeAstro - codeastro.com -->
-        <!-- ============================================================== -->
-        <!-- Login box.scss -->
-        <!-- ============================================================== -->
+        
     </div>
-    <!-- ============================================================== -->
-    <!-- All Required js -->
-    <!-- ============================================================== -->
+    
     <script src="assets/libs/jquery/dist/jquery.min.js "></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="assets/libs/popper.js/dist/umd/popper.min.js "></script>
     <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js "></script>
-    <!-- ============================================================== -->
-    <!-- This page plugin js -->
-    <!-- ============================================================== -->
+    
     <script>
         $(".preloader ").fadeOut();
     </script>

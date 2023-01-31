@@ -3,7 +3,8 @@
     include('../includes/dbconn.php');
     include('../includes/check-login.php');
     check_login();
-    if(isset($_POST['submit'])){
+    // The $_POST array is used to collect form data submitted via the HTTP POST method
+    if(isset($_POST['submit'])){ // if submit exists and is not null
         $roomno=$_POST['room'];
         $feespm=$_POST['fpm'];
         $foodstatus=$_POST['foodstatus'];
@@ -36,7 +37,6 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -48,59 +48,24 @@
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
 
-    <!-- <script>
-    function getSeater(val) {
-        $.ajax({
-        type: "POST",
-        url: "get-seater.php",
-        data:'roomid='+val,
-        success: function(data){
-        //alert(data);
-        $('#seater').val(data);
-        }
-        });
-
-        $.ajax({
-        type: "POST",
-        url: "get-seater.php",
-        data:'rid='+val,
-        success: function(data){
-        //alert(data);
-        $('#fpm').val(data);
-        }
-        });
-    }
-    </script> -->
-
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
+    
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
+    
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
+       
         <header class="topbar" data-navbarbg="skin6">
             <?php include '../includes/student-navigation.php'?>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+        
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
@@ -108,21 +73,14 @@
             </div>
             <!-- End Sidebar scroll-->
         </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
+        
         <div class="page-wrapper">
             
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
+            
             <div class="container-fluid">
                 
                 <form method="POST">
-                
+                <!-- TO check if user has allready booked a room , If email id is returned from registration table means that user has allready registered and hence alert is to be declared  -->
                 <?php
                     $uid=$_SESSION['login'];
                     $stmt=$mysqli->prepare("SELECT emailid FROM registration WHERE emailid=? ");
@@ -179,19 +137,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-                    <!-- <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Seater</h4>
-                                    <div class="form-group">
-                                        <input type="text" id="seater" name="seater" placeholder="Enter Seater No." required class="form-control">
-                                    </div>
-                            </div>
-                        </div>
-                    </div> -->
 
 
                     <div class="col-sm-12 col-md-6 col-lg-4">
@@ -274,7 +219,7 @@
                 <?php	
                 $aid=$_SESSION['id'];
                     $ret="select * from userregistration where id=?";
-                        $stmt= $mysqli->prepare($ret) ;
+                    $stmt= $mysqli->prepare($ret) ;
                     $stmt->bind_param('i',$aid);
                     $stmt->execute();
                     $res=$stmt->get_result();
@@ -482,28 +427,13 @@
                 </form>
 
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
+           
             <?php include '../includes/footer.php' ?>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
+            
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
+       
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
+    
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -525,53 +455,5 @@
 
 </body>
 
-<!-- Custom Ft. Script Lines -->
-<!-- <script type="text/javascript">
-	$(document).ready(function(){
-        $('input[type="checkbox"]').click(function(){
-            if($(this).prop("checked") == true){
-                $('#paddress').val( $('#address').val() );
-                $('#pcity').val( $('#city').val() );
-                $('#ppincode').val( $('#pincode').val() );
-            } 
-            
-        });
-    });
-    </script>
-    
-    <script>
-        function checkAvailability() {
-        $("#loaderIcon").show();
-        jQuery.ajax({
-        url: "check-availability.php",
-        data:'roomno='+$("#room").val(),
-        type: "POST",
-        success:function(data){
-            $("#room-availability-status").html(data);
-            $("#loaderIcon").hide();
-        },
-            error:function (){}
-            });
-        }
-    </script>
-
-
-    <script type="text/javascript">
-
-    $(document).ready(function() {
-        $('#duration').keyup(function(){
-            var fetch_dbid = $(this).val();
-            $.ajax({
-            type:'POST',
-            url :"ins-amt.php?action=userid",
-            data :{userinfo:fetch_dbid},
-            success:function(data){
-            $('.result').val(data);
-            }
-            });
-            
-
-    })});
-    </script> -->
 
 </html>

@@ -1,10 +1,10 @@
 <?php
     session_start();
     include('../includes/dbconn.php');
-    date_default_timezone_set('America/Chicago');
+    date_default_timezone_set('Asia/calcutta');
     include('../includes/check-login.php');
     check_login();
-    $aid=$_SESSION['id'];
+    $aid=$_SESSION['id']; // Session id passed by Index page
     if(isset($_POST['update']))
     {
 
@@ -24,11 +24,11 @@
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-<!-- By CodeAstro - codeastro.com -->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -40,45 +40,25 @@
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
 
-    <!-- <script type="text/javascript">
-    function valid(){
-        if(document.registration.password.value!= document.registration.cpassword.value){
-            alert("Password and Re-Type Password Field do not match !!");
-            document.registration.cpassword.focus();
-        return false;
-            } return true;
-     }
-    </script> -->
     
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
+    
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
+   
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
+        
         <header class="topbar" data-navbarbg="skin6">
             <?php include '../includes/student-navigation.php'?>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+        
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
@@ -86,17 +66,9 @@
             </div>
             <!-- End Sidebar scroll-->
         </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
+        
         <div class="page-wrapper">
-            <!-- By CodeAstro - codeastro.com -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
+           
             <div class="container-fluid">
                 
                 <div class="col-7 align-self-center">
@@ -109,28 +81,16 @@
                     <?php	
                     $aid=$_SESSION['id'];
                         $ret="select * from userregistration where id=?";
-                            $stmt= $mysqli->prepare($ret) ;
+                        $stmt= $mysqli->prepare($ret) ;
                         $stmt->bind_param('i',$aid);
                         $stmt->execute() ;//ok
                         $res=$stmt->get_result();
-                        //$cnt=1;
+                        
                         while($row=$res->fetch_object())
                         {
                             ?>
     
-                        <!-- <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Last Updated On</h4>
-                                        <div class="form-group">
-                                            <input type="text" value="<?php echo $row->updationDate; ?>" class="form-control" required readonly>
-                                        </div>
-                                    
-                                </div>
-                            </div>
-                        </div> -->
-
-<!-- By CodeAstro - codeastro.com -->
+                       
 
                         <div class="col-md-6">
                             <div class="card">
@@ -220,7 +180,7 @@
                             </div>
                         </div>
 
-<!-- By CodeAstro - codeastro.com -->
+
 
                         <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="card">
@@ -248,40 +208,23 @@
 
 
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
+            
             <?php include '../includes/footer.php' ?>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
+            
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
+        
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
+    
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- apps --><!-- By CodeAstro - codeastro.com -->
-    <!-- apps -->
     <script src="../dist/js/app-style-switcher.js"></script>
     <script src="../dist/js/feather.min.js"></script>
     <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
     <script src="../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="../dist/js/custom.min.js"></script>
-    <!--This page JavaScript -->
+   
     <script src="../assets/extra-libs/c3/d3.min.js"></script>
     <script src="../assets/extra-libs/c3/c3.min.js"></script>
     <script src="../assets/libs/chartist/dist/chartist.min.js"></script>

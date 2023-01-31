@@ -3,15 +3,12 @@
                     <!-- This is for the sidebar toggle which is visible on mobile only -->
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
                             class="ti-menu ti-close"></i></a>
-                    <!-- ============================================================== -->
+                    
                     <!-- Logo -->
-                    <!-- ============================================================== -->
                     <div class="navbar-brand">
                         <!-- Logo icon -->
                             <b class="logo-icon">
-                                <!-- Dark Logo icon -->
-                                <img src="../assets/images/logo-full.jpg" alt="homepage" class="dark-logo" style="width:50px"/>
-                                <!-- Light Logo icon -->
+                                <!-- Light Logo icon  -->
                                 <img src="../assets/images/logo-full.jpg" alt="homepage" class="light-logo" style="width:50px"/>
                             </b>
                             <!--End Logo icon -->
@@ -22,39 +19,23 @@
                                 <!-- Light Logo text -->
                             </span>
                     </div>
-                    <!-- ============================================================== -->
+                    
                     <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- Toggle which is visible on mobile only -->
-                    <!-- ============================================================== -->
                     <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
                         data-toggle="collapse" data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
                             class="ti-more"></i></a>
                 </div>
-                <!-- ============================================================== -->
+               
                 <!-- End Logo -->
-                <!-- ============================================================== -->
+                
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
-                        
-                        <!-- ============================================================== -->
-                        <!-- create new IF REQUIRED-->
-                        <!-- ============================================================== -->
-                        
+                   
+                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1">                       
                     </ul>
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
                     <ul class="navbar-nav float-right">
-                        
-                        <!-- ============================================================== -->
                         <!-- User profile -->
-                        <!-- ============================================================== -->
+                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
@@ -62,14 +43,14 @@
                                     width="40">
                                 
                                     <?php	
-                                    $aid=$_SESSION['id'];
+                                    $aid=$_SESSION['id']; // ID passed through session varibale from index page
                                         $ret="select * from userregistration where id=?";
-                                        $stmt= $mysqli->prepare($ret) ;
+                                        $stmt= $mysqli->prepare($ret) ; // prepare() method is used to prepare an SQL statement stored in the $ret variable for execution.
                                         $stmt->bind_param('i',$aid);
                                         $stmt->execute();
-                                        $res=$stmt->get_result();
+                                        $res=$stmt->get_result(); //to retrive result  set
                                         
-                                        while($row=$res->fetch_object())
+                                        while($row=$res->fetch_object()) // To fetch rows one by one until no row is left from th result object
                                         {
                                             ?>	
 
@@ -90,9 +71,7 @@
                                 
                             </div>
                         </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile -->
-                        <!-- ============================================================== -->
+                        <!-- User profile End -->
                     </ul>
                 </div>
             </nav>
